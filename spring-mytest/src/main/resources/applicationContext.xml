@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+		<!--根标签beans，里面配置一个又一个的bean子标签，每一个bean子标签都代表一个类的配置-->
+		<bean id="user1"  class="com.dlq.test.User">
+			<property name="id" value="000"/>
+			<property name="name" value="五条悟"/>
+		</bean>
+</beans>
