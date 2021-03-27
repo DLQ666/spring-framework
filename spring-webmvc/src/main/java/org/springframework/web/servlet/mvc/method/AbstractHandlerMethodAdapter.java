@@ -61,8 +61,10 @@ public abstract class AbstractHandlerMethodAdapter extends WebContentGenerator i
 
 	/**
 	 * This implementation expects the handler to be an {@link HandlerMethod}.
-	 * @param handler the handler instance to check
+	 * 这个实现 期望处理器是一个{@link HandlerMethod}类型.
+	 * @param handler the handler instance to check 检查处理器实例
 	 * @return whether or not this adapter can adapt the given handler
+	 *         这个适配器是否能够适应给定的处理器
 	 */
 	@Override
 	public final boolean supports(Object handler) {
@@ -78,6 +80,7 @@ public abstract class AbstractHandlerMethodAdapter extends WebContentGenerator i
 
 	/**
 	 * This implementation expects the handler to be an {@link HandlerMethod}.
+	 * 这个实现期望 处理器是一个{@link HandlerMethod}.
 	 */
 	@Override
 	@Nullable

@@ -34,10 +34,12 @@ public interface HandlerMethodArgumentResolver {
 
 	/**
 	 * Whether the given {@linkplain MethodParameter method parameter} is
-	 * supported by this resolver.
-	 * @param parameter the method parameter to check
+	 * supported by this resolver. 这个解析器支持。
+	 * @param parameter the method parameter to check 检查方法的参数
 	 * @return {@code true} if this resolver supports the supplied parameter;
-	 * {@code false} otherwise
+	 *  					如果这个解析器支持提供的参数;
+	 * {@code false} otherwise  否则 false
+	 * 当前解析器是否支持解析这种参数
 	 */
 	boolean supportsParameter(MethodParameter parameter);
 
@@ -55,6 +57,8 @@ public interface HandlerMethodArgumentResolver {
 	 * @param binderFactory a factory for creating {@link WebDataBinder} instances
 	 * @return the resolved argument value, or {@code null} if not resolvable
 	 * @throws Exception in case of errors with the preparation of argument values
+	 *
+	 * 支持就调用
 	 */
 	@Nullable
 	Object resolveArgument(MethodParameter parameter, @Nullable ModelAndViewContainer mavContainer,

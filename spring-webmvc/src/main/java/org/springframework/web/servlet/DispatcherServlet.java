@@ -323,7 +323,8 @@ public class DispatcherServlet extends FrameworkServlet {
 	@Nullable
 	private ThemeResolver themeResolver;
 
-	/** List of HandlerMappings used by this servlet. */
+	/** List of HandlerMappings used by this servlet.
+	 *  这个servlet使用的处理程序映射列表。 */
 	@Nullable
 	private List<HandlerMapping> handlerMappings;
 
@@ -988,14 +989,18 @@ public class DispatcherServlet extends FrameworkServlet {
 
 	/**
 	 * Process the actual dispatching to the handler.
+	 * 实际调度过程的处理程序。
 	 * <p>The handler will be obtained by applying the servlet's HandlerMappings in order.
+	 * <p>处理程序将得到应用的servlet处理程序映射。
 	 * The HandlerAdapter will be obtained by querying the servlet's installed HandlerAdapters
 	 * to find the first that supports the handler class.
+	 * 处理程序适配器将获得通过查询servlet的适配器安装处理程序找到第一个支持处理程序类。
 	 * <p>All HTTP methods are handled by this method. It's up to HandlerAdapters or handlers
 	 * themselves to decide which methods are acceptable.
-	 * @param request current HTTP request
-	 * @param response current HTTP response
-	 * @throws Exception in case of any kind of processing failure
+	 * <p>HTTP方法都是由这种方法处理。由处理程序适配器或处理程序本身来决定哪些方法是可以接受的。
+	 * @param request current HTTP request 当前HTTP请求
+	 * @param response current HTTP response 当前的HTTP响应
+	 * @throws Exception in case of any kind of processing failure 在任何一种处理失败的情况
 	 */
 	protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpServletRequest processedRequest = request;
@@ -1013,6 +1018,8 @@ public class DispatcherServlet extends FrameworkServlet {
 				multipartRequestParsed = (processedRequest != request);
 
 				// Determine handler for the current request.
+				// 确定当前请求处理器。
+				//HandlerMapping中找到能处理请求的Handler(Controller.method())（也就是我们编写的controller中方法）
 				mappedHandler = getHandler(processedRequest);
 				if (mappedHandler == null) {
 					noHandlerFound(processedRequest, response);
@@ -1020,9 +1027,12 @@ public class DispatcherServlet extends FrameworkServlet {
 				}
 
 				// Determine handler adapter for the current request.
+				// 决定 当前请求 处理器适配器。
+				// 为当前Handler 找一个适配器 HandlerAdapter
 				HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());
 
 				// Process last-modified header, if supported by the handler.
+				// 过程最后修改标题，如果处理程序支持的
 				String method = request.getMethod();
 				boolean isGet = "GET".equals(method);
 				if (isGet || "HEAD".equals(method)) {
@@ -1037,6 +1047,7 @@ public class DispatcherServlet extends FrameworkServlet {
 				}
 
 				// Actually invoke the handler.
+				// 实际调用处理程序。
 				mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
 
 				if (asyncManager.isConcurrentHandlingStarted()) {
@@ -1223,9 +1234,11 @@ public class DispatcherServlet extends FrameworkServlet {
 
 	/**
 	 * Return the HandlerExecutionChain for this request.
+	 * 返回请求的处理程序执行链。
 	 * <p>Tries all handler mappings in order.
-	 * @param request current HTTP request
-	 * @return the HandlerExecutionChain, or {@code null} if no handler could be found
+	 * <p>为了尝试所有处理程序映射。
+	 * @param request current HTTP request 当前HTTP请求
+	 * @return the HandlerExecutionChain, or {@code null} if no handler could be found 如果没有处理程序能找到
 	 */
 	@Nullable
 	protected HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
@@ -1261,12 +1274,14 @@ public class DispatcherServlet extends FrameworkServlet {
 
 	/**
 	 * Return the HandlerAdapter for this handler object.
-	 * @param handler the handler object to find an adapter for
+	 * 为当前处理器对象返回处理器适配器 。
+	 * @param handler the handler object to find an adapter for 找一个适配器的处理器对象
 	 * @throws ServletException if no HandlerAdapter can be found for the handler. This is a fatal error.
 	 */
 	protected HandlerAdapter getHandlerAdapter(Object handler) throws ServletException {
 		if (this.handlerAdapters != null) {
 			for (HandlerAdapter adapter : this.handlerAdapters) {
+				//判断当前adapter 支不支持当前handler
 				if (adapter.supports(handler)) {
 					return adapter;
 				}

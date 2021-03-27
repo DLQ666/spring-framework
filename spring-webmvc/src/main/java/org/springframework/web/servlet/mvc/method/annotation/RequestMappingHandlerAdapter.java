@@ -788,7 +788,7 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 			}
 		}
 		else {
-			// No synchronization on session demanded at all...
+			// No synchronization on session demanded at all... 没有同步会话要求
 			mav = invokeHandlerMethod(request, response, handlerMethod);
 		}
 
@@ -840,8 +840,8 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 			WebDataBinderFactory binderFactory = getDataBinderFactory(handlerMethod);
 			ModelFactory modelFactory = getModelFactory(handlerMethod, binderFactory);
 
-			ServletInvocableHandlerMethod invocableMethod = createInvocableHandlerMethod(handlerMethod);
-			if (this.argumentResolvers != null) {
+			ServletInvocableHandlerMethod invocableMethod = createInvocableHandlerMethod(handlerMethod); //Servlet可调用处理程序方法
+			if (this.argumentResolvers != null) { //设置参数解析器 一共26个
 				invocableMethod.setHandlerMethodArgumentResolvers(this.argumentResolvers);
 			}
 			if (this.returnValueHandlers != null) {
@@ -874,7 +874,7 @@ public class RequestMappingHandlerAdapter extends AbstractHandlerMethodAdapter
 				});
 				invocableMethod = invocableMethod.wrapConcurrentResult(result);
 			}
-
+			//				执行并处理
 			invocableMethod.invokeAndHandle(webRequest, mavContainer);
 			if (asyncManager.isConcurrentHandlingStarted()) {
 				return null;
